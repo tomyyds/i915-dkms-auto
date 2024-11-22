@@ -7,7 +7,7 @@ apt dist-upgrade -y
 # 安装 Proxmox VE 内核头文件
 apt-get install -y pve-headers-$(uname -r)
 
-# 克隆 i915-sriov-dkms 存储库
+# 克隆 i915-sriov-dkms 存储库(拉取慢可替换为https://gitee.com/ifwwww/i915-sriov-dkms.git
 git clone https://github.com/strongtz/i915-sriov-dkms.git
 cd i915-sriov-dkms
 
@@ -40,7 +40,7 @@ update-initramfs -u
 apt install -y sysfsutils
 
 # 配置 sriov_numvfs
-read -p "请输入你需要几个vGPU： " numvfs
+read -p "请输入你需要几个vGPU（最大7个）： " numvfs
 echo "devices/pci0000:00/0000:00:02.0/sriov_numvfs = $numvfs" | sudo tee /etc/sysfs.conf
 
 echo "请重启"
